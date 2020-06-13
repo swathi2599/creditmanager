@@ -1,0 +1,7 @@
+{
+    "name" : "creditmanager",
+    "description": "An application that allows transfer of credit between users",
+    "require" : {
+
+    }
+}
