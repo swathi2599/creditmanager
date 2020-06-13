@@ -1,0 +1,27 @@
+{
+  "name": "creditmanager",
+  "version": "1.0.0",
+  "description": "transfers credits between users",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swathi2599/creditmanager.git"
+  },
+  "keywords": [
+    "credit",
+    "manager"
+  ],
+  "author": "swathi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swathi2599/creditmanager/issues"
+  },
+  "homepage": "https://github.com/swathi2599/creditmanager#readme",
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1"
+  }
+}

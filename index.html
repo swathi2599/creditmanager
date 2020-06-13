@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="/practice/creditmanager/" />
+
+
+    <script src="./scripts/jquery.js"></script>
+    <!-- BOOTSTRAP -->
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <script src="./scripts/index.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+
+    <div class="wrapper container-fluid">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Credit Manager</h1>
+                <p class="lead">
+                    A place where you can transfer credits between people.
+                </p>
+                <button id="viewAllUsersBtn" type="button" class="btn btn-primary btn-lg view-users-btn">View all
+                    users</button>
+            </div>
+        </div>
+
+        <!-- USERS -->
+        <div class="list-container">
+        </div>
+
+        <!-- USER DETAILS -->
+        <div class="user-details">
+            <div class="card text-center">
+                <div class="card-header">
+                    <div class="row  text-align-left" >
+                       <span>Email-id: </span> <span class="email-id"></span>
+                    </div>
+                    <div class="row text-align-left">
+                        <span>Phone: </span> <span class="phone-num"></span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title user-name"></h5>
+                    <p class="card-text current-credit"></p>
+                    <a href="#" class="btn btn-primary" id="transferBtn" >Transfer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="transferModal" tabindex="-1" role="dialog" aria-labelledby="transferModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="transferModaltitle">Transfer credit</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-4 m-auto">
+                                <label for="inputState">Transfer credit to</label>
+                                <select id="creditTo" class="form-control transfer-users">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <input id="creditAmount" type="number" class="form-control mt-4" min="0" />
+                        </div>
+                    </form>
+                     <div class="alert-danger" id="txnInvalid" role="alert">
+                        Amount is greater than the current credit.Please adjust the current credit.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="transferConfirmBtn" class="btn btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+        <div class="alert-danger my-toast" id="txnFail" role="alert"> 
+        Transaction failed
+        </div>
+        <div class="alert-success my-toast"  id="txnSuccess" role="alert">
+            Transaction failed
+        </div>
+
+</body>
+
+</html>
