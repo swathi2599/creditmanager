@@ -98,7 +98,7 @@ function getTransferUsers() {
 
 function getUsers() {
     return $.ajax({
-            url: "/practice/users.php",
+            url: "/users.php",
             method: "GET",
             success:function(result){
                 console.log(result);
@@ -129,7 +129,7 @@ function transferAmount(){
         $("#txnInvalid").hide();
     }
     return $.ajax({
-        url: "/practice/transfer.php",
+        url: "/transfer.php",
         method: "POST",
         data: JSON.stringify({
             from: currentUser,
