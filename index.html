@@ -13,7 +13,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=10" />
 </head>
 
 <body>
@@ -25,13 +25,17 @@
                 <p class="lead">
                     A place where you can transfer credits between people.
                 </p>
-                <button id="viewAllUsersBtn" type="button" class="btn btn-primary btn-lg view-users-btn">View all
-                    users</button>
+                <button id="viewAllUsersBtn" type="button" class="btn btn-primary btn-lg view-users-btn">View users</button>
+                <button id="viewAllTransactionsBtn" type="button" class="btn btn-primary btn-lg view-users-btn">View transactions</button>
             </div>
         </div>
 
         <!-- USERS -->
-        <div class="list-container">
+        <div class="list-container  users-list">
+        </div>
+
+        <!-- TRANSACTIONS -->
+        <div class="list-container transactions-list">
         </div>
 
         <!-- USER DETAILS -->
@@ -78,8 +82,11 @@
                             <input id="creditAmount" type="number" class="form-control mt-4" min="0" />
                         </div>
                     </form>
-                     <div class="alert-danger" id="txnInvalid" role="alert">
+                     <div class="alert-danger input-alert" id="txnInvalid" role="alert">
                         Amount is greater than the current credit.Please adjust the current credit.
+                    </div>
+                    <div class="alert-danger input-alert" id="txnNegative" role="alert">
+                        credit amount should be positive. 
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -1,9 +1,13 @@
 $("document").ready(function () {
 
     $(".user-details").hide();
-
+    
     $("#viewAllUsersBtn").on("click", function () {
         showAllUsers();
+    });
+
+    $("#viewAllTransactionsBtn").on("click", function () {
+        showAllTransactions();
     });
 
     // $("#creditAmount").on("focus", function(){
@@ -11,6 +15,8 @@ $("document").ready(function () {
     // });
     $("#transferBtn").on("click", function () {
         //Popup is now open
+        $("#txnInvalid").hide();
+        $("#txnNegative").hide();
         $("#transferModal").modal("show");
         $("#creditAmount").val(0);
         //Fill the transfer users
@@ -30,6 +36,7 @@ $("document").ready(function () {
 
 
 var users = [];
+var transactions  = [];
 var currentUser = 0;
 
 /**
@@ -52,16 +59,34 @@ function showAllUsers() {
          }
          renderUsers();
     })
-
-    
 }
 
+
+function showAllTransactions() {
+    getTransactions().then(function(result){
+         transactions=[];
+         for(var i=0;i<result.length;i++){
+            let txn = {
+                from: result[i].sender,
+                to:result[i].receiver,
+                amount: result[i].amount,
+               }
+             transactions.push(txn);
+        
+         }
+         renderTransactions();
+    })
+}
+
+
 function renderUsers(){
-    var listContainer = $(".list-container");
+    $(".transactions-list").hide();
+    $(".users-list").show();
+    var listContainer = $(".users-list");
     hideContent();
     var listGroup = '<ul class="list-group"></ul>';
     listContainer.append(listGroup);
-    var listGroup = $(".list-container").find(".list-group");
+    var listGroup = $(".users-list").find(".list-group");
     for (var i = 0; i < users.length; i++) {
         var item = '<li data-user-tag=' + users[i].id + ' class="list-group-item d-flex justify-content-between align-items-center">' + users[i].name + '<span class="badge badge-primary badge-pill">' + users[i].currentCredit + '</span></li>';
         listGroup.append(item);
@@ -78,6 +103,20 @@ function renderUsers(){
         hideContent();
         $(".user-details").show(400);
     });
+}
+
+function renderTransactions(){
+    $(".users-list").hide();
+    $(".transactions-list").show();
+    var listContainer = $(".transactions-list ");
+    hideContent();
+    var listGroup = '<ul class="list-group"></ul>';
+    listContainer.append(listGroup);
+    var listGroup = $(".transactions-list").find(".list-group");
+    for (var i = 0; i < transactions.length; i++) {
+        var item = '<li class="list-group-item d-flex justify-content-between align-items-center">' + transactions[i].from  +' sent '+ transactions[i].amount +  ' to '+ transactions[i].to +'</li>';
+        listGroup.append(item);
+    }
 }
 
 function hideContent() {
@@ -107,11 +146,8 @@ function getUsers() {
                 "Content-Type":"application/json"
             }
         })
+}
 
-
-
-
-    }
 function transferAmount(){
     var selectedIndex= document.getElementById("creditTo").selectedIndex;
     var creditTo=document.getElementById("creditTo").item(selectedIndex).getAttribute("data-user-tag");
@@ -127,6 +163,14 @@ function transferAmount(){
     }
     else{
         $("#txnInvalid").hide();
+    }
+
+    if(amount < 0 ){
+        $("#txnNegative").show();
+        return;
+    }
+    else{
+        $("#txnNegative").hide();
     }
     return $.ajax({
         url: "/transfer.php",
@@ -150,6 +194,19 @@ function transferAmount(){
             "Content-Type":"application/json"
         }
     })
+}
+
+function getTransactions() {
+    return $.ajax({
+            url: "/transactions.php",
+            method: "GET",
+            success:function(result){
+                console.log(result);
+            },
+            headers: {
+                "Content-Type":"application/json"
+            }
+        })
 }
 
 
